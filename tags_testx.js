@@ -126,6 +126,7 @@ $(".tags-input input").on( "keyup", function(event) {
     if(event.which == 8) {
         if(query==""){
             console.log("Clearing suggestions");
+            $('.autocomplete-items-test').html('');
             //$('.tags-input .autocomplete-items').html('');
             return;
         }
@@ -229,8 +230,6 @@ function list_select(){
             }
             $('.autocomplete-items-test').append("<div class='"+ highlight_arrow +"'>"+x_data[i].name +"</div>");
             
-            $('.autocomplete-items_x').append("<div class='"+ highlight_arrow +"'>"+x_data[i].name +"</div>");
-
         }
     });
 
