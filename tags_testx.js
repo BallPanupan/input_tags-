@@ -31,6 +31,7 @@ $(document).on('click','#tags_list', function() {
     let template="<span class=\"tag\"><span class=\"text\" _value='"+list_tags+"'>"+list_tags+"</span><span class=\"close\">&times;</span></span>\n";
     $('.data').append(template);
     $('.autocomplete-items-test').html('');
+    
 });
 
 
@@ -116,7 +117,6 @@ $(".tags-input input").on( "keydown", function(event) {
 
         }
     }
-
 });
 
 
