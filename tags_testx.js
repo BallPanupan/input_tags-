@@ -127,6 +127,7 @@ $(".tags-input input").on( "focusout", function(event) {
 
     //remove txt in input type='text'
     console.log('remove txt');
+
 });
 
 
