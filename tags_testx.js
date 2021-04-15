@@ -219,6 +219,7 @@ function list_select(){
         var highlight_arrow = "";
 
         $('.autocomplete-items-test').html('');
+        $('.autocomplete-items_x').html('');
 
         for (let i = 0; i < x_data.length; i++) {
             if(i == stack_highlight){
@@ -227,7 +228,13 @@ function list_select(){
                 highlight_arrow = "";
             }
             $('.autocomplete-items-test').append("<div class='"+ highlight_arrow +"'>"+x_data[i].name +"</div>");
-        }
+            
+            $('.autocomplete-items_x').append("<div class='"+ highlight_arrow +"'>"+x_data[i].name +"</div>");
 
+        }
     });
+
+    // var t_list_down = "<div>Panupan_X</div><div>Panupan_X2</div>";
+    // $('.autocomplete-items').append(t_list_down);
+    // console.log('x');
 }
