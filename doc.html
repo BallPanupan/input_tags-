@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tags input</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+<!--    /*syntax highlighting*/-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeFadeToGrey.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCss.min.js"></script>
+
+<!--    /*tags input css*/-->
+    <link rel="stylesheet" href="tags.css">
+
+    <style>
+        /*
+        Custom styles go here
+         */
+        #myTags {
+            box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+            padding: 3px 0px 3px 3px;
+            margin: 5px 1px 3px 0px;
+            border: 1px solid rgba(81, 203, 238, 1);
+        }
+
+        .container{
+            width: 70%;
+            margin: 0 auto;
+            padding-top: 5vh;
+        }
+
+        body{
+            font-family: 'Lato', sans-serif;
+        }
+        .syntaxhighlighter{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            font-weight: lighter;
+        }
+
+        .attachment-full{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+        }
+    </style>
+</head>
+<body>
+        <a href="https://github.com/neveresthub/tags-input"><img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_left_green_007200.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
+        <div class="container">
+            <h1 style="text-align: center">Tags input</h1>
+            <p style="text-align: center">Made with love at <a href="https://www.neverest.co.ke">Neverest hub</a> </p>
+            <div class="tags-input" id="myTags">
+                <span class="data">
+                    <span class="tag"><span class="text" _value="Nairobi 047">Nairobi 047</span><span class="close">&times;</span></span>
+                    <span class="tag"><span class="text" _value="24">Mombasa</span><span class="close">&times;</span></span>
+                </span>
+
+                    <span class="autocomplete">
+                    <input type="text">
+                    <div class="autocomplete-items">
+                    </div>
+                </span>
+            </div>
+
+            <h2>Usage</h2>
+            <p>link the javascript and css dependancies to your page</p>
+
+            <pre class="brush: js">
+                <link rel="stylesheet" href="../path/to/tags.css">
+                <script type="text/javascript" src="../path/to/tags.js"></script>
+
+
+            </pre>
+
+            <p>Add the following html to your page section where tags inputs are required</p>
+            <pre class="brush: js">
+
+            <!--html required to create tags input-->
+             <div class="tags-input" id="_my_tags_input">
+                <span class="data"></span>
+                    <span class="autocomplete"><input type="text"><div class="autocomplete-items"></div>
+                </span>
+            </div>
+
+
+            </pre>
+            <h4>Retrieving values</h4>
+
+            <pre class="brush: js">
+                let tags = $('#_my_tags_input').tagsValues()
+            </pre>
+
+            <h4>Defining a suggestions function</h4>
+            <p>The implementation invokes a function <code style="color: red">runSuggestions(el,q)</code> on key up.
+            Perform the necessary logic to provide suggestions and append them to the suggestions area. <br> <br>
+                Suggestions data should be an associative array with the give format and must be assigned to the suggestions
+                variable.
+            <pre class="brush: js">
+
+                let json_data = [
+                    {"name": "Nairobi","id": 1},
+                    {"name": "Mombasa","id": 2},
+                    ...
+                ]
+                _tag_input_suggestions_data = data;
+
+            </pre>
+            </p>
+            <p>Example of a suggestions function using AJAX <code style="color: red">$.getJSON()</code></p>
+            <pre class="brush: js">
+                function runSuggestions(element,query) {
+
+                    /*
+                    using ajax to populate suggestions
+                     */
+                    let sug_area=$(element).parents().eq(2).find('.autocomplete .autocomplete-items');
+                    $.getJSON("data.json", function( data ) {
+                        //update the data used for suggestions for purpose of retrieval after suggestions click
+                        _tag_input_suggestions_data = data;
+                        $.each(data,function (key,value) {
+                            let template = $("<div>"+value.name+"</div>").hide()
+                            sug_area.append(template)
+                            template.show()
+
+                        })
+                    });
+
+                }
+            </pre>
+
+
+        </div>
+
+
+<!--        /*Jquery and tags input js*/-->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="tags.js"></script>
+
+
+
+
+
+        <script>
+            $(function () {
+                SyntaxHighlighter.all();
+
+                console.log($('#myTags').tagsValues())
+
+
+            })
+
+            function runSuggestions(element,query) {
+
+                /*
+                using ajax to populate suggestions
+                 */
+                let sug_area=$(element).parents().eq(2).find('.autocomplete .autocomplete-items');
+                $.getJSON("data.json", function( data ) {
+                    _tag_input_suggestions_data = data;
+                    $.each(data,function (key,value) {
+                        let template = $("<div>"+value.name+"</div>").hide()
+                        sug_area.append(template)
+                        template.show()
+
+                    })
+                });
+
+            }
+        </script>
+
+
+</body>
+</html>
