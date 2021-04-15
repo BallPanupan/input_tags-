@@ -20,7 +20,21 @@ Handle click of the input area
  */
 $('.tags-input').click(function () {
     $(this).find('input').focus();
+
 });
+
+//click tags list
+$(document).on('click','#tags_list', function() {
+    var list_tags = $(this).text();
+    console.log('list_tags:', list_tags);
+
+    let template="<span class=\"tag\"><span class=\"text\" _value='"+list_tags+"'>"+list_tags+"</span><span class=\"close\">&times;</span></span>\n";
+    $('.data').append(template);
+    $('.autocomplete-items-test').html('');
+});
+
+
+
 
 /*
 handle the click of close button on the tags
@@ -29,6 +43,8 @@ handle the click of close button on the tags
 $(document).on("click", ".tags-input .data .tag .close", function() {
     // whatever you do to delete this row
     $(this).parent().remove()
+
+
 })
 
 /*
@@ -41,7 +57,7 @@ $(document).on("click", ".tags-input .autocomplete-items div", function() {
     let data_holder = $(this).parents().eq(4).find('.data')
     _add_input_tag(data_holder,data.id,data.name)
     console.log(data.name);
-    $('.tags-input .autocomplete-items').html('');
+    //$('.tags-input .autocomplete-items').html('');
 
 })
 
@@ -96,7 +112,7 @@ $(".tags-input input").on( "keydown", function(event) {
         }else{
             $(this).val("")
             var that = this;
-            setTimeout(function(){ $(that).parents().eq(2).find('.autocomplete .autocomplete-items').html(""); }, 500);
+            //setTimeout(function(){ $(that).parents().eq(2).find('.autocomplete .autocomplete-items').html(""); }, 500);
 
         }
     }
@@ -107,7 +123,7 @@ $(".tags-input input").on( "keydown", function(event) {
 $(".tags-input input").on( "focusout", function(event) {
     $(this).val("")
     var that = this;
-    setTimeout(function(){ $(that).parents().eq(2).find('.autocomplete .autocomplete-items').html(""); }, 500);
+    //setTimeout(function(){ $(that).parents().eq(2).find('.autocomplete .autocomplete-items').html(""); }, 500);
 
     //remove txt in input type='text'
     console.log('remove txt');
@@ -132,7 +148,7 @@ $(".tags-input input").on( "keyup", function(event) {
         }
     }
 
-    $('.tags-input .autocomplete-items').html('');
+    //$('.tags-input .autocomplete-items').html('');
     runSuggestions($(this),query)
 
 });
@@ -151,7 +167,6 @@ $(".tags-input input").on( "keydown", function(event) {
         }
     }
 
-
     //check_max_value
     var check_max_value = 0;
     $.getJSON("./skills_feed/skills_feed.php?skill="+ query_key, function(data_max) {
@@ -160,27 +175,6 @@ $(".tags-input input").on( "keydown", function(event) {
 
     if(event.which == 38){
         console.log("UP");
-
-        $.getJSON("./skills_feed/skills_feed.php?skill="+ query_key, function(x_data) {
-            stack_highlight_max = x_data.length;
-            //console.log('x_data', x_data);
-            var loca_div = 0;
-            var highlight_arrow ="";
-
-            $('.autocomplete-items-test').html('');
-
-            for (let i = 0; i < x_data.length; i++) {
-                loca_div++;
-                if(i == stack_highlight){
-                    highlight_arrow = "highlight_arrow";
-                }else{
-                    highlight_arrow = "";
-                }
-
-                $('.autocomplete-items-test').append("<div style='display: block;' class='"+ highlight_arrow +"'>"+x_data[i].name +"</div>");
-            }
-
-        });
 
         if(stack_highlight <= 0){
             stack_highlight = 0;
@@ -193,8 +187,6 @@ $(".tags-input input").on( "keydown", function(event) {
 
     if(event.which == 40){
         console.log("DOWN");
-
-        list_select();
 
         //fix max value
         if(stack_highlight > (stack_highlight_max-2)){
@@ -228,12 +220,8 @@ function list_select(){
             }else{
                 highlight_arrow = "";
             }
-            $('.autocomplete-items-test').append("<div class='"+ highlight_arrow +"'>"+x_data[i].name +"</div>");
+            $('.autocomplete-items-test').append("<div id='tags_list' class='div-items "+ highlight_arrow +"'>"+x_data[i].name +"</div>");
             
         }
     });
-
-    // var t_list_down = "<div>Panupan_X</div><div>Panupan_X2</div>";
-    // $('.autocomplete-items').append(t_list_down);
-    // console.log('x');
 }

@@ -82,8 +82,19 @@
     background-color: #e9e9e9;
 }
 
+.autocomplete-items-test {
+    font-size: 20px;
+}
+
+.div-items {
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #d4d4d4;
+}
+
 /* /////// */
-.tags-input .autocomplete-items-test {
+.droup_down_x {
     position: absolute;
     /* border: 1px solid #d4d4d4; */
     border-bottom: none;
@@ -93,24 +104,6 @@
     top: 100%;
     left: 0;
     right: 0;
-}
-.tags-input .autocomplete-items-test div {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #fff;
-    border-bottom: 1px solid #d4d4d4;
-}
-
-
-.tags-input .autocomplete-items-test div:hover {
-    /*when hovering an item:*/
-    background-color: #e9e9e9;
-}
-
-.tags-input .autocomplete-test {
-    /*the container must be positioned relative:*/
-    position: relative;
-    display: inline-block;
 }
 
 
