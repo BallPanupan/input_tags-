@@ -61,14 +61,17 @@
                     <input type="text" id="input_skill">
                     <div class="autocomplete-items">
                     </div>
-                </span>
+                </span> 
         </div>
+        <div class="autocomplete-items_x"></div>
+        
     </div>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
-<script src="./tags_test.js"></script>
+<script src="./tags_testx.js"></script>
         <script>
             $(function () {
                         console.log($('#myTags').tagsValues())
+
                     })
 
                     var skills_list = [];
@@ -77,6 +80,8 @@
                         skills_list = []
                         query_key = query;
                         list_select();
+                    
+                    //Log input    
                     // console.log(query);
                         /*
                         using ajax to populate suggestions
@@ -85,13 +90,11 @@
                         $.getJSON("./skills_feed/skills_feed.php?skill="+ query, function( data ) {
                             _tag_input_suggestions_data = data;
                             $.each(data,function (key,value) {
-                                let template = $("<div>"+value.name+"</div>").show()
+                                let template = $("<div>"+value.name+"</div>").hide()//.hide
                                 sug_area.append(template)
-                                    template.show()
+                                    template.hide();
                                 //console.log(value.name);
                                 skills_list.push(value.name);
-
-                                console.log(template);
                             });
                         });
                         
