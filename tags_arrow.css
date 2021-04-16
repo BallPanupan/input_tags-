@@ -21,7 +21,7 @@
     padding-top:2px ;
     padding-bottom: 2px;
     border: 2px solid #5f6368;
-    border-radius: 10px;
+    border-radius: 5px;
     padding-left: 7px;
     padding-right: 7px;
     font-size: 12px;
@@ -124,5 +124,3 @@
     left: 0;
     right: 0;
 }
-
-
